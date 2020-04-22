@@ -1,0 +1,24 @@
+{
+  "name": "functional-caver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haeminmoon/functional-caver-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haeminmoon/functional-caver-js/issues"
+  },
+  "homepage": "https://github.com/haeminmoon/functional-caver-js#readme",
+  "dependencies": {
+    "caver-js": "^1.4.1",
+    "dot-env": "0.0.1",
+    "fff-js": "0.0.13"
+  }
+}
