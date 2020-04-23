@@ -1,7 +1,5 @@
-Object.assign(global, require('fff-js'))
-
 const { ACCOUNT, TX } = require('../index')
-log(ACCOUNT)
+
 /**
  * AccountKeyLegacy : 0x01
  * AccountKeyPublic : 0x02
@@ -14,23 +12,37 @@ log(ACCOUNT)
 // Account update test key : 0x84f04b78667f547194c017567a5a8cc33e4f1d069a3a320c1ad58538a33ce130
 // 0x65c325b87a97c4d9d834782fda48323078eda842
 
-const privateKey = '0x84f04b78667f547194c017567a5a8cc33e4f1d069a3a320c1ad58538a33ce130'
-const newKey = ACCOUNT.createPrivateKey();
-log(newKey);
+// account key
+// pk x : 0xeaa8a5a778dfe0e5f0ec50000adeebe9b13edc65ae14bc4e6324bee1771a8771
+// address x : 0x76503ce393ea8a4ecd027ff0e675b4718878c4e6
+
+// pk y : 0x82c59b7f7559b037872ffea923e3dc5be42580f8acdc1ad55ddda5b76c6f83a7
+// address y : 0x389714d95d6c8b5413f5abf2cef012e7dc9c7e8f
+
+
+
+const privateKey = '0xf79059119ee4b1a8f12267b77543342c3cffe53242ad5e1be922bef3866b82c5'
+const newKey = ACCOUNT.createPrivateKey()
+
+log(`newKey : ${newKey}` )
 
 go(
   ACCOUNT.createSigner(privateKey),
-  (account) => ACCOUNT.createAccountForUpdate(account, ACCOUNT.createPrivateKey()),
+  (account) => ACCOUNT.createAccountForUpdate(account.address, newKey),
+  (key) => ({
+    type: 'ACCOUNT_UPDATE',
+    from: ACCOUNT.privateKeyToAccount(privateKey).address,
+    key,
+    gas: 50000,
+  }),
+  tx => TX.send(tx),
   log
 )
 
-
-// const accountUpdateTx = {
-//   type: 'ACCOUNT_UPDATE',
-//   from: account.address,
-//   key,
-//   gas: 50000,
-//  }
+// go(
+//   ACCOUNT.getAccountKey(ACCOUNT.privateKeyToAccount(privateKey).address),
+//   log
+// )
 
 // console.log(accountKey)
 // console.log(`type: ${accountKey.type}`)

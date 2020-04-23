@@ -34,7 +34,7 @@ module.exports = (caver) => {
    *  }
    * }
    */
-  ACCOUNT.createAccountForUpdate = (account, newKey) => caver.klay.accounts.createAccountForUpdate(account.address, newKey)
+  ACCOUNT.createAccountForUpdate = (address, key) => caver.klay.accounts.createAccountForUpdate(address, key)
 
   /**
    * @description Create signed account
@@ -47,6 +47,10 @@ module.exports = (caver) => {
    * @return { Object } Signer
    */
   ACCOUNT.createSigner = pipe(ACCOUNT.privateKeyToAccount, ACCOUNT.addWallet)
+
+  ACCOUNT.getAccountKey = (address) => caver.klay.getAccountKey(address)
+
+  ACCOUNT.updateAccountKey = (address, key) => caver.klay.accounts.wallet.updateAccountKey(address, key)
 
   return ACCOUNT
 }
