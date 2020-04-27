@@ -34,7 +34,10 @@ module.exports = (caver) => {
    *  }
    * }
    */
-  ACCOUNT.createAccountForUpdate = (address, key) => caver.klay.accounts.createAccountForUpdate(address, key)
+  ACCOUNT.createAccountForUpdate = (account, key) => ({ 
+    targetAccount : account,
+    accountForUpdate : caver.klay.accounts.createAccountForUpdate(account.address, key)
+  })
 
   /**
    * @description Create signed account
